@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Phone Models</title>
+   <style>
+       body {
+           font-family: Arial, sans-serif;
+           margin: 0;
+           padding: 0;
+           background-color: #f0f0f0;
+       }
+
+
+       .container {
+           max-width: 800px;
+           margin: 20px auto;
+           padding: 20px;
+           background-color: #fff;
+           border-radius: 8px;
+           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+       }
+
+
+       h1 {
+           text-align: center;
+           color: blue;
+           font-size: 40px;
+
+
+       }
+
+
+       label {
+           display: block;
+           margin-bottom: 5px;
+           font-weight: bold;
+       }
+
+
+       select {
+           width: 30%;
+           padding: 8px;
+           margin-bottom: 15px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+       }
+
+
+       textarea {
+           width: 40%;
+           padding: 8px;
+           margin-bottom: 15px;
+           border: 1px solid #cccccc;
+           border-radius: 5px;
+       }
+   </style>
+</head>
+
+
+<body>
+   <h1>Mobile Searching System</h1>
+   <hr>
+   <br>
+   <label for="brands">Select a Phone Brand:</label>
+   <select id="brands" onchange="displayModels()">
+       <option value="">Select Brand</option>
+       <option value="samsung">Samsung</option>
+       <option value="iphone">IPhone</option>
+       <option value="oppo">Oppo</option>
+       <option value="vivo">Vivo</option>
+   </select>
+
+
+   <br><br>
+
+
+   <label for="models">Select a Phone Model:</label>
+   <select id="models" onchange="displaySpecifications()" disabled>
+       <option value="">Select Brand First</option>
+   </select>
+
+
+   <br><br>
+
+
+   <label for="specs">Specifications:</label>
+   <textarea id="specs" rows="1" cols="70" readonly></textarea>
+
+
+   <script>
+       // Define the dictionary of phone brands and models
+       const phoneModels = {
+           samsung: ["Samsung A10", "Samsung A20", "Samsung A30"],
+           iphone: ["IPhone 11", "IPhone 12", "IPhone 13"],
+           oppo: ["Oppo V20", "Oppo F19", "Oppo F11"],
+           vivo: ["Vivo Y20", "Vivo Y21", "Vivo Y55"]
+       };
+
+
+       // Define the dictionary of phone specifications
+       const phoneSpecs = {
+           "Samsung A10": "Name: Samsung A10, RAM: 4 GB, ROM: 64 GB, Camera: 13, Price: 22,000 PKR",
+           "Samsung A20": "Name: Samsung A20, RAM: 4 GB, ROM: 64 GB, Camera: 18, Price: 28,000 PKR",
+           "Samsung A30": "Name: Samsung A30, RAM: 4 GB, ROM: 64 GB, Camera: 25, Price: 29,000 PKR",
+           "IPhone 11": "Name: Iphone 11, RAM: 4 GB, ROM: 64 GB, Camera: 12, Price: 100,000 PKR",
+           "IPhone 12": "Name: Iphone 12, RAM: 4 GB, ROM: 64 GB, Camera: 12, Price: 150,000 PKR",
+           "IPhone 13": "Name: Iphone 13, RAM: 6 GB, ROM: 128 GB, Camera: 24, Price: 200,000 PKR",
+           "Oppo V20": "Name: Oppo V20, RAM: 8 GB, ROM: 128 GB, Camera: 64, Price: 54,999 PKR",
+           "Oppo F19": "Name: Oppo F19, RAM: 6 GB, ROM: 128 GB, Camera: 48, Price: 36,999 PKR",
+           "Oppo F11": "Name: Oppo F11, RAM: 4 GB, ROM: 64 GB, Camera: 48, Price: 35,999 PKR",
+           "Vivo Y20": "Name: Vivo Y20, RAM: 4 GB, ROM: 64 GB, Camera: 13, Price: 26,999 PKR",
+           "Vivo Y21": "Name: Vivo Y21, RAM: 4 GB, ROM: 64 GB, Camera: 13, Price: 43,999 PKR",
+           "Vivo Y55": "Name: Vivo Y55, RAM: 8 GB, ROM: 128 GB, Camera: 50, Price: 64,999 PKR",
+       };
+
+
+       // Function to display models based on selected brand
+       function displayModels() {
+           const selectedBrand = document.getElementById("brands").value;
+           const modelsDropdown = document.getElementById("models");
+           const specsTextarea = document.getElementById("specs");
+
+
+           // Clear previous models and specifications
+           modelsDropdown.innerHTML = '<option value="">Select Model</option>';
+           specsTextarea.value = "";
+
+
+           if (selectedBrand && phoneModels[selectedBrand]) {
+               const models = phoneModels[selectedBrand];
+               models.forEach(model => {
+                   const option = document.createElement("option");
+                   option.text = model;
+                   modelsDropdown.add(option);
+               });
+               modelsDropdown.disabled = false;
+           } else {
+               modelsDropdown.disabled = true;
+           }
+       }
+
+
+       // Function to display specifications based on selected model
+       function displaySpecifications() {
+           const selectedModel = document.getElementById("models").value;
+           const specsTextarea = document.getElementById("specs");
+
+
+           if (selectedModel && phoneSpecs[selectedModel]) {
+               const specs = phoneSpecs[selectedModel];
+               specsTextarea.value = specs;
+           } else {
+               specsTextarea.value = "";
+           }
+       }
+   </script>
+</body>
+
+
+</html>
+
